@@ -34,6 +34,10 @@ jobs:
         echo "ngrok version: $(~/ngrok/ngrok version)"
         echo "ngrok path: $(which ngrok)"
 
+    - name: Configure ngrok authentication token
+      run: |
+        ~/ngrok/ngrok authtoken 2NYnvBRf6PWdSkGlxJqdcyR9yMA_6KVZof5xyrErD8tTGZiba
+
     - name: Start ngrok and expose FastAPI
       run: |
         ~/ngrok/ngrok http 8080 > ngrok.log &
