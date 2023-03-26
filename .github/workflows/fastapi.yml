@@ -26,6 +26,14 @@ jobs:
     - name: Run FastAPI
       run: uvicorn main:app --reload --host 0.0.0.0 --port 8080 &
 
+    - name: Download and install ngrok
+      run: |
+        mkdir -p ~/ngrok && cd ~/ngrok
+        curl -L https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -o ngrok.zip
+        unzip -o ngrok.zip && rm -f ngrok.zip
+        echo "ngrok version: $(~/ngrok/ngrok version)"
+        echo "ngrok path: $(which ngrok)"
+
     - name: Start ngrok and expose FastAPI
       run: |
         ~/ngrok/ngrok http 8080 > ngrok.log &
