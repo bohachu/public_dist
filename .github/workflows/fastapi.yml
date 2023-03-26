@@ -23,15 +23,8 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Download and install ngrok
-      run: |
-        mkdir -p ~/ngrok && cd ~/ngrok
-        curl -L https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip -o ngrok.zip
-        unzip -o ngrok.zip && rm -f ngrok.zip
-
     - name: Run FastAPI
-      run: |
-        uvicorn main:app --reload --host 0.0.0.0 --port 8080
+      run: uvicorn main:app --reload --host 0.0.0.0 --port 8080 &
 
     - name: Start ngrok and expose FastAPI
       run: |
@@ -39,3 +32,6 @@ jobs:
         sleep 10
         NGROK_URL=$(curl -s http://localhost:4040/api/tunnels | jq -r '.tunnels[0].public_url')
         echo "NGROK URL: ${NGROK_URL}"
+
+    - name: Sleep for 24 hours
+      run: sleep 86400
