@@ -1,0 +1,72 @@
+name: 分散式運算
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        vm:
+          - vm-1
+          - vm-2
+          - vm-3
+          - vm-4
+          - vm-5
+          - vm-6
+          - vm-7
+          - vm-8
+          - vm-9
+          - vm-10
+          - vm-11
+          - vm-12
+          - vm-13
+          - vm-14
+          - vm-15
+          - vm-16
+          - vm-17
+          - vm-18
+          - vm-19
+          - vm-20
+          - vm-21
+          - vm-22
+          - vm-23
+          - vm-24
+          - vm-25
+          - vm-26
+          - vm-27
+          - vm-28
+          - vm-29
+          - vm-30
+          - vm-31
+          - vm-32
+          - vm-33
+          - vm-34
+          - vm-35
+          - vm-36
+          - vm-37
+          - vm-38
+          - vm-39
+          - vm-40
+    steps:
+      - name: 印出開始運算時間和機器編號
+        run: |
+          echo "開始運算時間：$(TZ=Asia/Taipei date)"
+          echo "機器編號：$HOSTNAME"
+        shell: bash
+      - name: 執行分散式運算
+        run: |
+          sleep $((10 + RANDOM % 11))
+        shell: bash
+      - name: 再次執行分散式運算
+        run: |
+          sleep $((10 + RANDOM % 11))
+        shell: bash
+      - name: 印出結束運算時間和機器編號
+        run: |
+          echo "結束運算時間：$(TZ=Asia/Taipei date)"
+          echo "機器編號：$HOSTNAME"
+        shell: bash
